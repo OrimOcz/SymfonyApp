@@ -3,16 +3,50 @@
 {% block body %}
 
 <div class="container">
-    <div class="row">
-        <h3 class="mt-5 mb-5">form</h3>
-        <div class="col-md-6 offset-md-3">
+    <div class="">
+        <h3 class="text-center">Add customer contact</h3>
+
+        {% for message in app.flashes('notice') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="">
             {{ form_start(form) }}
-                <div class="form-group">
-                    {{ form_widget(form.title,{'attr':{'class':'form-control'}})}}
+            <div class="form-row mx-auto">
+                <div class="form-group col-md-3">
+                    {{ form_widget(form.firstName,{'attr': {'class': 'form-control'}})}}
                 </div>
+                <div class="form-group col-md-3">
+                    {{ form_widget(form.lastName,{'attr':{'class':'form-control'}})}}
+                </div>
+                <div class="form-group col-md-3">
+                    {{ form_widget(form.phone,{'attr':{'class':'form-control'}})}}
+                </div>
+                <div class="form-group col-md-2">
+                    <button class="btn btn-info mt-2 text-white" type="submit">Submit</button>
+                </div>
+            </div>
             {{ form_end(form) }}
         </div>
     </div>
+    <table class="table">
+        <thead>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+        </thead>
+        <tbody>
+        {% for data in contact %}
+            <tr>
+                <td>{{ data.firstName }}</td>
+                <td>{{ data.lastName }}</td>
+                <td>{{ data.phone }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 
 {% endblock %}

@@ -22,15 +22,29 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("create", name="create")
+     * @Route("/create", name="create")
      */
     public function create(Request $request){
+
+        $data = $this->getDoctrine()->getRepository(Customers::class)->findAll();
+
+
         $customers = new Customers();
         $form = $this->createForm(CustomersType::class, $customers);
         $form->handleRequest($request);
 
+        /* Control form */
+        if($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($customers);
+            $em->flush();
+
+            $this->addFlash('notice','Submitted Successfully!');
+        }
+
         return $this->render('main/create.html.twig',[
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'contact' => $data
         ]);
 
     }
