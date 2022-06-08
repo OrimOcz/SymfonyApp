@@ -9,16 +9,19 @@ use App\Form\CustomersFormType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class UsersController extends AbstractController
+class CustomersController extends AbstractController
 {
     public function show(Environment $twig)
     {
+        /**
+         * @Route("/show")
+         */
         $customers = new Customers();
 
         $form = $this->createForm(CustomersFormType::class);
 
-        return new Response($twig->render('users/show.html.twig', [
-            'users_form' => $form->crateView()
+        return new Response($twig->render('customers/show.html.twig', [
+            'customers_form' => $form->crateView()
         ]));
     }
 

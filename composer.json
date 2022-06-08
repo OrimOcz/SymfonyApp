@@ -1,0 +1,10 @@
+{
+    "require": {
+        "symfony/webpack-encore-bundle": "^1.14",
+        "symfony/http-kernel": "^6.1",
+        "symfony/orm-pack": "^2.2",
+        "symfony/maker-bundle": "^1.43",
+        "symfony/twig-bundle": "^6.1",
+        "symfony/twig-pack": "^1.0"
+    }
+}

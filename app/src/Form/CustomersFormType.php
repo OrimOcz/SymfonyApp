@@ -15,7 +15,8 @@ class CustomersFormType extends AbstractType
             ->add('firstName')
             ->add('lastName')
             ->add('phone', PhoneType::class)
-            ->add('Submit', SubmitType::class);
+            ->add('Submit', SubmitType::class)
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
