@@ -8,11 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MainController extends AbstractController
 {
     /**
-     * @Route("/", name="app_main")
+     * @Route("/main", name="main")
      */
     public function index(): Response
     {
@@ -20,13 +21,22 @@ class MainController extends AbstractController
             'controller_name' => 'MainController',
         ]);
     }
+    /**
+     * @Route("/loader", name="loader")
+     */
+    public function loader(): Response
+    {
+        return $this->redirectToRoute('');
+    }
+
 
     /**
-     * @Route("/create", name="create")
+     * @Route("/", name="create")
      */
     public function create(Request $request){
 
         $data = $this->getDoctrine()->getRepository(Customers::class)->findAll();
+        $removeTheField=true;
 
 
         $customers = new Customers();
@@ -40,12 +50,21 @@ class MainController extends AbstractController
             $em->flush();
 
             $this->addFlash('notice','Submitted Successfully!');
+
+            return $this->redirectToRoute('loader');
         }
+
 
         return $this->render('main/create.html.twig',[
             'form' => $form->createView(),
             'contact' => $data
         ]);
 
+    }
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'validation_groups' => false,
+        ]);
     }
 }
