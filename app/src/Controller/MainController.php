@@ -26,7 +26,7 @@ class MainController extends AbstractController
      */
     public function loader(): Response
     {
-        return $this->redirectToRoute('');
+        echo "<script>location.href='/';</script>";
     }
 
 
