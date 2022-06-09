@@ -26,7 +26,8 @@ class MainController extends AbstractController
      */
     public function loader(): Response
     {
-        echo "<script>location.href='/';</script>";
+        header('Location: /');
+        exit();
     }
 
 
